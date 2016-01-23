@@ -5,6 +5,7 @@
 
 library(shiny)
 
+# Atomic masses (i.e. coefficients for predicting molecular mass)
 atomicmass <- c(12.01, 1.008, 14.01, 16.00, 32.07)
 names(atomicmass) <- c("C","H","N","O","S")
 
