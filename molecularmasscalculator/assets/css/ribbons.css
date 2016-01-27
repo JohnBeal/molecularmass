@@ -48,3 +48,4 @@
   -moz-user-select: none;
   user-select: none;
 }
+sup {font-size:x-small; vertical-align:super;}
