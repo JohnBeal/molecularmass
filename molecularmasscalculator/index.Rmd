@@ -6,20 +6,60 @@ job         : Chemist
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-widgets     : []            # {mathjax, quiz, bootstrap}
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
 ---
 
-## Read-And-Delete
+## Molecular Mass Calculator
 
-1. Edit YAML front matter
-2. Write using R Markdown
-3. Use an empty line followed by three dashes to separate slides!
+[Relative molecular mass] (http://goldbook.iupac.org/R05271.html) is an important characteristic of molecular chemical compounds. It is defined as the ratio of the mass of a molecule to the [unified atomic mass unit] (http://goldbook.iupac.org/U06554.html). Its units are defined as 1/12th the mass of a <sup>12</sup>C atom.
 
---- .class #id 
+Calculating the molecular mass of a molecule from its molecular formula is a routine, but mundane task suitable for automation.
 
-## Slide 2
+
+
+---
+
+## CHNOPS
+
+- C - carbon
+- H - hydrogen
+- N - nitrogen
+- O - oxygen
+- P - phosphorus
+- S - sulfur
+
+Combinations of these six chemical elements make up most biological molecules (and a significant subset of organic molecules too). For the sake of simplicity, the initial version of the molecular mass calculator is limited to these elements.  
+
+---
+
+## Code ##
+
+$$Mr = \Sigma m_i.n_i$$
+
+- \(Mr\), molecular mass. 
+- \(mi\), atomic mass of element \(i\).
+- \(ni\), number of atoms of element \(i\) in molecule.
+
+```{r}
+molecularmass <- function (nC = 0, nH = 0, nN = 0, nO = 0, nP = 0, nS = 0, atomicmasses) {
+                        round(sum(nC*atomicmasses["C"],
+                                  nH*atomicmasses["H"],
+                                  nN*atomicmasses["N"],
+                                  nO*atomicmasses["O"],
+                                  nP*atomicmasses["P"],
+                                  nS*atomicmasses["S"]), 2)
+}
+```
+
+---
+
+## User Interface
+
+
+
+
 
 
 
