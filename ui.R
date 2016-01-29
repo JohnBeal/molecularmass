@@ -27,7 +27,10 @@ shinyUI(fluidPage(
         h3("Your molecular formula:"),    
         htmlOutput("molform"),
         h3("Molecular mass:"),
-        textOutput("molmass")
+        textOutput("molmass"),
+        p("E.g. The molecular formula for adenosine triphosphate (ATP) is ", 
+          "C", tags$sub(10), "H", tags$sub(16), "N", tags$sub(5), "O", tags$sub(13), "P", tags$sub(3))
+        
     )
   )
 ))
