@@ -13,7 +13,7 @@ knit        : slidify::knit2slides
 
 ## Molecular Mass Calculator
 
-[Relative molecular mass] (http://goldbook.iupac.org/R05271.html) is an important characteristic of molecular chemical compounds. It is defined as the ratio of the mass of a molecule to the [unified atomic mass unit] (http://goldbook.iupac.org/U06554.html). Its units are defined as \(\frac{1}{12}\)th the mass of a <sup>12</sup>C atom.
+[Relative molecular mass] (http://goldbook.iupac.org/R05271.html) is an important characteristic of molecular chemical compounds. It is defined as the ratio of the mass of a molecule to the [unified atomic mass unit] (http://goldbook.iupac.org/U06554.html). Its units are defined as \(\frac{1}{12}\)<sup>th</sup> the mass of a <sup>12</sup>C atom.
 
 Calculating the molecular mass of a molecule from its molecular formula is a routine, but mundane task suitable for automation.
 
