@@ -7,7 +7,7 @@ output: html_document
 
 ## Molecular Mass
 
-Relative molecular mass is an important characteristic of molecular chemical compounds. It is defined as the ratio of the mass of a molecule to the unified atomic mass unit. Its units are defined as \(\frac{1}{12}\)<sup>th</sup> the mass of a <sup>12</sup>C atom.
+Relative molecular mass is an important characteristic of molecular chemical compounds. It is defined as the ratio of the mass of a molecule to the unified atomic mass unit. Its units are defined as 1/12<sup>th</sup> the mass of a <sup>12</sup>C atom.
 
 ### CHNOPS
 
@@ -15,15 +15,6 @@ C - carbon, H - hydrogen, N - nitrogen, O - oxygen, P - phosphorus, S - sulfur
 
 Combinations of these six chemical elements make up most biological molecules (and a significant subset of organic molecules too). For the sake of simplicity, the initial version of the molecular mass calculator is limited to these elements. 
 
-### Methodology
-
-$$Mr = \Sigma m_i.n_i$$
-
-- \(Mr\), molecular mass. 
-- \(mi\), atomic mass of element \(i\).
-- \(ni\), number of atoms of element \(i\) in molecule.
-
-Molecular mass is calculated as the sum of the product of the atomic mass of the element and number of atoms of the element in the molecule; for each element in the molecule. 
 
 ### Shiny App
 
