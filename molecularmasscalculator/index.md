@@ -1,0 +1,86 @@
+---
+title       : Molecular Mass Calculator 
+subtitle    : Shiny app created for Coursera Developing Data Products course    
+author      : John Beal
+job         : Chemist
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Molecular Mass Calculator
+
+[Relative molecular mass] (http://goldbook.iupac.org/R05271.html) is an important characteristic of molecular chemical compounds. It is defined as the ratio of the mass of a molecule to the [unified atomic mass unit] (http://goldbook.iupac.org/U06554.html). Its units are defined as \(\frac{1}{12}\)<sup>th</sup> the mass of a <sup>12</sup>C atom.
+
+Calculating the molecular mass of a molecule from its molecular formula is a routine, but mundane task suitable for automation.
+
+### CHNOPS
+
+C - carbon, H - hydrogen, N - nitrogen, O - oxygen, P - phosphorus, S - sulfur
+
+Combinations of these six chemical elements make up most biological molecules (and a significant subset of organic molecules too). For the sake of simplicity, the initial version of the molecular mass calculator is limited to these elements.  
+
+---
+
+## Methdology
+
+$$Mr = \Sigma m_i.n_i$$
+
+- \(Mr\), molecular mass. 
+- \(mi\), atomic mass of element \(i\).
+- \(ni\), number of atoms of element \(i\) in molecule.
+
+Molecular mass is calculated as the sum of the product of the atomic mass of the element and number of atoms of the element in the molecule; for each element in the molecule. 
+
+---
+
+## Code ##
+
+The algorithm is enacted in server.R by the following R code:
+
+
+```r
+## Atomic masses (i.e. coefficients for predicting molecular mass) for CHNOPS
+atomicmass <- c(12.01, 1.008, 14.01, 16.00, 30.97, 32.07)
+names(atomicmass) <- c("C","H","N","O", "P", "S")
+
+## Function takes input of number of carbon (C), hydrogen (H), nitrogen (N), oxygen (O), 
+## phosphorus (P) and sulfur (S) atoms in a molecule,and returns the molecular mass. 
+## Function also requires vector of atomic masses.
+molecularmass <- function (nC = 0, nH = 0, nN = 0, nO = 0, nP = 0, nS = 0, atomicmasses) {
+                        round(sum(nC*atomicmasses["C"],
+                                  nH*atomicmasses["H"],
+                                  nN*atomicmasses["N"],
+                                  nO*atomicmasses["O"],
+                                  nP*atomicmasses["P"],
+                                  nS*atomicmasses["S"]), 2)
+}
+```
+
+---
+
+## Example
+
+Example for the important biological chemical ATP (adenosine triphosphate, C<sub>10</sub>H<sub>16</sub>N<sub>5</sub>O<sub>13</sub>P<sub>3</sub>):
+inputting C = 10, H = 16, N = 5, O = 13, P = 3 returns the molecular mass of 507.19:
+
+
+```r
+molecularmass(nC = 10, nH = 16, nN = 5, nO = 13, nP = 3, atomicmasses = atomicmass)
+```
+
+```
+## [1] 507.19
+```
+
+
+
+
+
+
+
+
+

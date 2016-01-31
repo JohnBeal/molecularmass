@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Molecular Mass Calculator</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Molecular Mass Calculator">
+  <meta name="author" content="John Beal">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Molecular Mass Calculator</h1>
+    <h2>Shiny app created for Coursera Developing Data Products course</h2>
+    <p>John Beal<br/>Chemist</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Molecular Mass Calculator</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><a href="http://goldbook.iupac.org/R05271.html">Relative molecular mass</a> is an important characteristic of molecular chemical compounds. It is defined as the ratio of the mass of a molecule to the <a href="http://goldbook.iupac.org/U06554.html">unified atomic mass unit</a>. Its units are defined as \(\frac{1}{12}\)<sup>th</sup> the mass of a <sup>12</sup>C atom.</p>
+
+<p>Calculating the molecular mass of a molecule from its molecular formula is a routine, but mundane task suitable for automation.</p>
+
+<h3>CHNOPS</h3>
+
+<p>C - carbon, H - hydrogen, N - nitrogen, O - oxygen, P - phosphorus, S - sulfur</p>
+
+<p>Combinations of these six chemical elements make up most biological molecules (and a significant subset of organic molecules too). For the sake of simplicity, the initial version of the molecular mass calculator is limited to these elements.  </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Methdology</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>\[Mr = \Sigma m_i.n_i\]</p>
+
+<ul>
+<li>\(Mr\), molecular mass. </li>
+<li>\(mi\), atomic mass of element \(i\).</li>
+<li>\(ni\), number of atoms of element \(i\) in molecule.</li>
+</ul>
+
+<p>Molecular mass is calculated as the sum of the product of the atomic mass of the element and number of atoms of the element in the molecule; for each element in the molecule. </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Code</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The algorithm is enacted in server.R by the following R code:</p>
+
+<pre><code class="r">## Atomic masses (i.e. coefficients for predicting molecular mass) for CHNOPS
+atomicmass &lt;- c(12.01, 1.008, 14.01, 16.00, 30.97, 32.07)
+names(atomicmass) &lt;- c(&quot;C&quot;,&quot;H&quot;,&quot;N&quot;,&quot;O&quot;, &quot;P&quot;, &quot;S&quot;)
+
+## Function takes input of number of carbon (C), hydrogen (H), nitrogen (N), oxygen (O), 
+## phosphorus (P) and sulfur (S) atoms in a molecule,and returns the molecular mass. 
+## Function also requires vector of atomic masses.
+molecularmass &lt;- function (nC = 0, nH = 0, nN = 0, nO = 0, nP = 0, nS = 0, atomicmasses) {
+                        round(sum(nC*atomicmasses[&quot;C&quot;],
+                                  nH*atomicmasses[&quot;H&quot;],
+                                  nN*atomicmasses[&quot;N&quot;],
+                                  nO*atomicmasses[&quot;O&quot;],
+                                  nP*atomicmasses[&quot;P&quot;],
+                                  nS*atomicmasses[&quot;S&quot;]), 2)
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Example</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Example for the important biological chemical ATP (adenosine triphosphate, C<sub>10</sub>H<sub>16</sub>N<sub>5</sub>O<sub>13</sub>P<sub>3</sub>):
+inputting C = 10, H = 16, N = 5, O = 13, P = 3 returns the molecular mass of 507.19:</p>
+
+<pre><code class="r">molecularmass(nC = 10, nH = 16, nN = 5, nO = 13, nP = 3, atomicmasses = atomicmass)
+</code></pre>
+
+<pre><code>## [1] 507.19
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Molecular Mass Calculator'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Methdology'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Code'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Example'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
